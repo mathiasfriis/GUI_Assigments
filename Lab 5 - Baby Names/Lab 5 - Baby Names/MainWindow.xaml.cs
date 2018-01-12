@@ -22,11 +22,13 @@ namespace Lab_5___Baby_Names
     public partial class MainWindow : Window
     {
 
-        List<BabyName> babyNames = new List<BabyName>();
-        int selectedDecade = 2000;
+        List<BabyName> babyNames = new List<BabyName>(); //Holds all data about all babynames.
+        int selectedDecade = 2000; //Default value.
 
-        Dictionary<int, BabyName[]> top10babyNamesByDecade = new Dictionary<int, BabyName[]>();
-        Dictionary<int, string[]> top10babyNamesStrings = new Dictionary<int, string[]>();
+        Dictionary<int, BabyName[]> top10babyNamesByDecade = new Dictionary<int, BabyName[]>(); //Info about top 10 baby names by decade. Holds both boys and girls names.
+        Dictionary<int, string[]> top10babyNamesStrings = new Dictionary<int, string[]>(); //Strings based on info about top 10 for bboth boys and girls.
+
+        List<String> selectedNameOverYears = new List<string>(); //Strings based on popularity for the searched name over the years.
 
         public MainWindow()
         {
@@ -35,13 +37,14 @@ namespace Lab_5___Baby_Names
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            LB_names.ItemsSource = top10babyNamesStrings[selectedDecade];
+            LB_names.ItemsSource = top10babyNamesStrings[selectedDecade]; //init ListBox.
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(CB_decade.Text!="")
+            if(CB_decade.Text!="") //for initial checking.
             {
+                //Updates the selected decade and updates the ListBox accordingly.
                 ComboBoxItem comboBoxItem = (ComboBoxItem)CB_decade.SelectedItem;
                 selectedDecade = int.Parse(comboBoxItem.Content.ToString());
                 //MessageBox.Show("selected decade: " + selectedDecade);
@@ -51,7 +54,7 @@ namespace Lab_5___Baby_Names
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //read all baby names
+            //read all baby names on loadup.
             using (var reader = new StreamReader(@"../../../05-babynames.txt"))
             {
                 while (!reader.EndOfStream)
@@ -94,6 +97,48 @@ namespace Lab_5___Baby_Names
 
                 //add to matrix of name strings.
                 top10babyNamesStrings.Add(i, strings);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            String currentName = TB_searchName.Text.ToString(); //get name to search for
+            MessageBox.Show("Searching for name: " + currentName);
+            try {
+                BabyName currentNameObject = babyNames.Find(x => x.Name == currentName); //find name object.
+                TB_avg_rating.Text = currentNameObject.AverageRank().ToString(); //get average rating.
+
+                //get rating over years.
+                selectedNameOverYears.Clear();
+                for (int i = 1900; i <= 2000; i += 10)
+                {
+                    selectedNameOverYears.Add(i + ": " + currentNameObject.Rank(i));
+                }
+
+                //update ListBox
+                LB_nameOverYears.ItemsSource = selectedNameOverYears;
+
+                //Get trend
+                String trend = "";
+                if (currentNameObject.Trend() == 0)
+                {
+                    trend = "Popularity stable";
+                }
+                else if (currentNameObject.Trend() < 0)
+                {
+                    trend = "Decreasing popularity";
+                }
+                else if (currentNameObject.Trend() > 0)
+                {
+                    trend = "Increasing popularity";
+                }
+
+                //update trend
+                TB_trend.Text = trend;
+            }
+            catch //if no data for name is found
+            {
+                MessageBox.Show("No data for name: " + currentName);
             }
         }
     }
