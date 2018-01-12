@@ -141,5 +141,30 @@ namespace Lab_5___Baby_Names
                 MessageBox.Show("No data for name: " + currentName);
             }
         }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void FontMenu_Small_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.FontSize = 10;
+        }
+
+        private void FontMenu_Normal_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.FontSize = 12;
+        }
+
+        private void FontMenu_Large_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.FontSize = 14;
+        }
+
+        private void FontMenu_Huge_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.FontSize = 16;
+        }
     }
 }
