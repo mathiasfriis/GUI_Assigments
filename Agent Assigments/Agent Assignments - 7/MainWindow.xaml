@@ -9,6 +9,10 @@
     <Window.Resources>
         <local:Agents x:Key="agents" />
         <SolidColorBrush x:Key="BackgroundBrush" Color="AliceBlue"/>
+        <ImageBrush x:Key="LeftArrow" ImageSource="ArrowLeft.png"/>
+        <ImageBrush x:Key="RightArrow" ImageSource="ArrowRight.png"/>
+        <ImageBrush x:Key="AddSign" ImageSource="Plus.png"/>
+        <ImageBrush x:Key="DeleteSign" ImageSource="delete.jpg"/>
     </Window.Resources>
     <Window.DataContext>
         <local:Agents/>
@@ -36,10 +40,10 @@
             </MenuItem>
         </Menu>
         <ToolBar DockPanel.Dock="Top" Height="35">
-            <Button Width="30" Height="30" Content="left" Command="{Binding PreviousCommand}"/>
-            <Button Width="30" Height="30" Content="right" Command="{Binding NextCommand}"/>
-            <Button Width="30" Height="30" Content="add" Command="{Binding NewCommand}"/>
-            <Button Width="30" Height="30" Content="delete" Command="{Binding DeleteCommand}"/>
+            <Button Width="30" Height="30" Background="{StaticResource LeftArrow}" Command="{Binding PreviousCommand}"/>
+            <Button Width="30" Height="30" Background="{StaticResource RightArrow}" Command="{Binding NextCommand}"/>
+            <Button Width="30" Height="30" Background="{StaticResource AddSign}" Command="{Binding NewCommand}"/>
+            <Button Width="30" Height="30" Background="{StaticResource DeleteSign}" Command="{Binding DeleteCommand}"/>
             <Label Content="File Name:" FontWeight="Bold"/>
             <TextBox x:Name="tbxFileName" Width="150"/>
         </ToolBar>
