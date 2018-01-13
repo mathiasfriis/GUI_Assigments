@@ -1,6 +1,7 @@
 ﻿using Agent_Assignments;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,28 @@ namespace Agent_Assigments
             DateTime d;
             d = DateTime.Now;
             LabelTime.Content = d.Hour + " : " + d.Minute + " : " + d.Second;
+        }
+
+        private void sortOrderCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem cbi = e.AddedItems[0] as ComboBoxItem;
+            string newSortOrder;
+            if (cbi != null)
+            {
+                if (cbi.Tag == null)
+                    newSortOrder = "None";
+                else
+                    newSortOrder = cbi.Tag.ToString();
+
+                SortDescription sortDesc = new SortDescription(newSortOrder, ListSortDirection.Ascending);
+                ICollectionView cv = CollectionViewSource.GetDefaultView(DataContext);
+                if (cv != null)
+                {
+                    cv.SortDescriptions.Clear();
+                    if (newSortOrder != "None")
+                        cv.SortDescriptions.Add(sortDesc);
+                }
+            }
         }
     }
 }

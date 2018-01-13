@@ -99,6 +99,16 @@
             <Button Style="{StaticResource ResourceKey=Button_style}" Width="30" Height="30" Background="{StaticResource DeleteSign}" Command="{Binding DeleteCommand}"/>
             <Label Content="File Name:" FontWeight="Bold"/>
             <TextBox Style="{StaticResource ResourceKey=TextBox_style}" x:Name="tbxFileName" Width="150"/>
+            <Label Content="Sort Order:" FontWeight="Bold"/>
+            <ComboBox Width="100" x:Name="sortOrderCombo" SelectedIndex="0"
+                      FontSize="12"
+                      SelectionChanged="sortOrderCombo_SelectionChanged"
+                      >
+                <ComboBoxItem Tag="None">None</ComboBoxItem>
+                <ComboBoxItem Tag="ID">ID</ComboBoxItem>
+                <ComboBoxItem Tag="CodeName">CodeName</ComboBoxItem>
+                <ComboBoxItem Tag="Speciality">Speciality</ComboBoxItem>
+            </ComboBox>
         </ToolBar>
         <StatusBar DockPanel.Dock="Bottom" Height="auto" HorizontalAlignment="Stretch">
             <StatusBarItem>

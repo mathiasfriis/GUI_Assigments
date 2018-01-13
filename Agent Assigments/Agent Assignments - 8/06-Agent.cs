@@ -45,6 +45,21 @@ namespace Agent_Assignments
             }
         }
 
+        Agent currentAgent = null;
+
+        public Agent CurrentAgent
+        {
+            get { return currentAgent; }
+            set
+            {
+                if (currentAgent != value)
+                {
+                    currentAgent = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         #endregion
 
         #region INotifyPropertyChanged implementation
