@@ -109,6 +109,13 @@
                 <ComboBoxItem Tag="CodeName">CodeName</ComboBoxItem>
                 <ComboBoxItem Tag="Speciality">Speciality</ComboBoxItem>
             </ComboBox>
+            <Label Content="Speciality:" FontWeight="Bold"/>
+            <ComboBox Margin= "0,4,0,4" Width="120" x:Name="priorityFilterCombo" 
+                      FontSize="12"
+                      ItemsSource="{Binding Path=FilterSpecialities, Mode=OneWay}"
+                      SelectedIndex="{Binding Path=CurrentSpecialityIndex}"
+                      >
+            </ComboBox>
         </ToolBar>
         <StatusBar DockPanel.Dock="Bottom" Height="auto" HorizontalAlignment="Stretch">
             <StatusBarItem>

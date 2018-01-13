@@ -12,6 +12,7 @@ using System.Windows;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Media;
+using System.Windows.Data;
 
 namespace Agent_Assignments
 {
@@ -58,6 +59,47 @@ namespace Agent_Assignments
                     NotifyPropertyChanged();
                 }
             }
+        }
+
+        public IReadOnlyCollection<string> FilterSpecialities
+        {
+            get
+            {
+                ObservableCollection<string> result = new ObservableCollection<string>();
+                result.Add("All");
+                foreach (var s in new Specialities())
+                    result.Add(s);
+                return result;
+            }
+        }
+
+        int currentSpecialityIndex = 0;
+
+        public int CurrentSpecialityIndex
+        {
+            get { return currentSpecialityIndex; }
+            set
+            {
+                if (currentSpecialityIndex != value)
+                {
+                    ICollectionView cv = CollectionViewSource.GetDefaultView(this);
+                    currentSpecialityIndex = value;
+                    if (currentSpecialityIndex == 0)
+                        cv.Filter = null; // Index 0 is no filter (show all)
+                    else
+                    {
+                        filter = FilterSpecialities.ElementAt(currentSpecialityIndex);
+                        cv.Filter = CollectionViewSource_Filter;
+                    }
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private bool CollectionViewSource_Filter(object ag)
+        {
+            Agent agent = ag as Agent;
+            return (agent.Speciality == filter);
         }
 
         #endregion
@@ -261,6 +303,8 @@ namespace Agent_Assignments
 
 
         ICommand _ColorCommand;
+        private string filter;
+
         public ICommand ColorCommand
         {
             get { return _ColorCommand ?? (_ColorCommand = new RelayCommand<String>(ColorCommand_Execute)); }
