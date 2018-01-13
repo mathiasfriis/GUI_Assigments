@@ -23,7 +23,7 @@ namespace Agent_Assignments
         {
             if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
             {
-                Add(new Agent("007", "James Bond", "MI-5 HQ", "Espionage", "UpperVolta"));
+                Add(new Agent("007", "James Bond", "MI-5 HQ", "Assassination", "UpperVolta"));
                 Add(new Agent("003", "Trinity", "The Matrix", "Kicking butt", "BluePill"));
             }
         }

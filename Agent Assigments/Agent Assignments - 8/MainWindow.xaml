@@ -8,6 +8,8 @@
         Title="MainWindow" Height="195.961" Width="525" MinHeight="290" MinWidth="700">
     <Window.Resources>
         <local:Agents x:Key="agents" />
+        <local:Specialities x:Key="specialities" />
+        
         <SolidColorBrush x:Key="BackgroundBrush" Color="AliceBlue"/>
         <ImageBrush x:Key="LeftArrow" ImageSource="ArrowLeft.png"/>
         <ImageBrush x:Key="RightArrow" ImageSource="ArrowRight.png"/>
@@ -127,7 +129,9 @@
             <Label Content="Assignment" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Height="26" Width="84"/>
             <TextBox Style="{StaticResource ResourceKey=JamesStyle}" x:Name="TB_ID" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,14,0,0" TextWrapping="Wrap" Text="{Binding Path=ID}" VerticalAlignment="Top" Width="120"/>
             <TextBox Style="{StaticResource ResourceKey=TextBox_style}" x:Name="TB_CodeName" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,14,0,0" TextWrapping="Wrap" Text="{Binding Path=CodeName}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-            <TextBox Style="{StaticResource ResourceKey=TextBox_style}" x:Name="TB_Specialty" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,17,0,0" TextWrapping="Wrap" Text="{Binding Path=Speciality}" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
+            <ComboBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="10" Width="150"
+                      ItemsSource="{Binding Source={StaticResource specialities}}" 
+                      SelectedItem="{Binding Path=Speciality}"/>
             <TextBox Style="{StaticResource ResourceKey=TextBox_style}" x:Name="TB_Assignment" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,14,0,0" TextWrapping="Wrap" Text="{Binding Path=Assignment}" VerticalAlignment="Top" Width="120" Grid.Row="3" AcceptsReturn="True" />
             <ListBox ItemsSource="{Binding}"
                  IsSynchronizedWithCurrentItem="True" SelectedIndex="{Binding Path=CurrentIndex}"
