@@ -18,6 +18,15 @@
         </Style>
         <Style x:Key="Button_style" TargetType="{x:Type Button}">
             <Setter Property="ToolTip" Value="This is a tooltip applied by a style. Deal with it."/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect" >
+                        <Setter.Value>
+                            <DropShadowEffect ShadowDepth="2" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="{x:Type Label}">
