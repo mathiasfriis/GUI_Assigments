@@ -13,6 +13,9 @@
         <ImageBrush x:Key="RightArrow" ImageSource="ArrowRight.png"/>
         <ImageBrush x:Key="AddSign" ImageSource="Plus.png"/>
         <ImageBrush x:Key="DeleteSign" ImageSource="delete.jpg"/>
+
+        <local:AgentIdToColorValueConverter x:Key="IdToColorConverter" />
+
         <Style x:Key="TextBox_style" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="Chartreuse"/>
         </Style>
@@ -45,15 +48,19 @@
         <DataTemplate x:Key="AgentTemplate">
             <WrapPanel>
                 <TextBlock Text="{Binding Path=ID}" Padding="5, 0" 
-                           Width="40" 
+                           Width="40"
+                           Foreground="{Binding Path=ID, Converter={StaticResource IdToColorConverter}}"
                            />
                 <TextBlock Text="{Binding Path=CodeName}" Padding="5, 0"
                            Width="80"
+                           Foreground="{Binding Path=ID, Converter={StaticResource IdToColorConverter}}"
                            />
                 <TextBlock Text="{Binding Path=Speciality}" Padding="5, 0" 
                            Width="80" 
+                           Foreground="{Binding Path=ID, Converter={StaticResource IdToColorConverter}}"
                            />
                 <TextBlock Text="{Binding Path=Assignment}" Padding="5, 0"
+                           Foreground="{Binding Path=ID, Converter={StaticResource IdToColorConverter}}"
                            />
             </WrapPanel>
         </DataTemplate>
