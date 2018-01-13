@@ -19,6 +19,11 @@
         <Style x:Key="Button_style" TargetType="{x:Type Button}">
             <Setter Property="ToolTip" Value="This is a tooltip applied by a style. Deal with it."/>
         </Style>
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
     </Window.Resources>
     <Window.DataContext>
         <local:Agents/>
