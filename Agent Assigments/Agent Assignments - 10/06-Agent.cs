@@ -13,12 +13,18 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Data;
+using Microsoft.Win32;
+using Agent_Assignments___10;
 
 namespace Agent_Assignments
 {
    public class Agents : ObservableCollection<Agent>, INotifyPropertyChanged
     {
-        public string filename = "";
+        const string AppTitle = "Agent Assignments 4 - Lab 3";
+        string filename = "";
+        string filePath = "";
+        string filter;
+        string Title;
 
         public Agents()
         {
@@ -222,15 +228,22 @@ namespace Agent_Assignments
 
         private void SaveAsCommand_Execute(string argFilename)
         {
-            if (argFilename == "")
-            {
-                MessageBox.Show("You must enter a file name in the File Name textbox!", "Unable to save file",
-                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            var dialog = new SaveFileDialog();
+
+            dialog.Filter = "Agent assignment documents|*.agn|All Files|*.*";
+            dialog.DefaultExt = "agn";
+            if (filePath == "")
+                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             else
+                dialog.InitialDirectory = Path.GetDirectoryName(filePath);
+
+            if (dialog.ShowDialog(App.Current.MainWindow) == true)
             {
-                filename = argFilename;
-                SaveFileCommand_Execute();
+                filePath = dialog.FileName;
+                filename = Path.GetFileName(filePath);
+                SaveFile();
+                Title = filename + " - " + AppTitle;
+
             }
         }
 
@@ -248,6 +261,22 @@ namespace Agent_Assignments
             // Serialize all the agents.
             serializer.Serialize(writer, this);
             writer.Close();
+        }
+
+        private void SaveFile()
+        {
+            List<Agent> tempAgents;
+
+            try
+            {
+                // Copy the agents to a List. 
+                tempAgents = this.ToList<Agent>();
+                Repository.SaveFile(filePath, tempAgents);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unable to save file", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private bool SaveFileCommand_CanExecute()
@@ -276,43 +305,39 @@ namespace Agent_Assignments
         ICommand _OpenFileCommand;
         public ICommand OpenFileCommand
         {
-            get { return _OpenFileCommand ?? (_OpenFileCommand = new RelayCommand<string>(OpenFileCommand_Execute)); }
+            get { return _OpenFileCommand ?? (_OpenFileCommand = new RelayCommand(OpenFileCommand_Execute)); }
         }
 
-        private void OpenFileCommand_Execute(string argFilename)
+        private void OpenFileCommand_Execute()
         {
-            if (argFilename == "")
-            {
+            List<Agent> tempAgents;
+            var dialog = new OpenFileDialog();
 
-                MessageBox.Show("You must enter a file name in the File Name textbox!", "Unable to save file",
-                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            dialog.Filter = "Agent assignment documents|*.agn|All Files|*.*";
+            dialog.DefaultExt = "agn";
+            if (filePath == "")
+                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             else
-            {
-                filename = argFilename;
-                Agents tempAgents = new Agents();
-                tempAgents.Clear();
+                dialog.InitialDirectory = Path.GetDirectoryName(filePath);
 
-                // Create an instance of the XmlSerializer class and specify the type of object to deserialize.
-                XmlSerializer serializer = new XmlSerializer(typeof(Agents));
+            if (dialog.ShowDialog(App.Current.MainWindow) == true)
+            {
+                filePath = dialog.FileName;
+                filename = Path.GetFileName(filePath);
                 try
                 {
-                    TextReader reader = new StreamReader(filename);
-                    // Deserialize all the agents.
-                    tempAgents = (Agents)serializer.Deserialize(reader);
-                    reader.Close();
+                    Repository.ReadFile(filePath, out tempAgents);
+
+                    // We have to insert the agents in the existing collection. 
+                    Clear();
+                    foreach (var agent in tempAgents)
+                        Add(agent);
+                    Title = filename + " - " + AppTitle;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Unable to open file", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-                // We have to insert the agents in the existing collection. 
-                Clear();
-                foreach (var agent in tempAgents)
-                    Add(agent);
-
-                NotifyPropertyChanged("Count");
             }
         }
 
@@ -332,7 +357,7 @@ namespace Agent_Assignments
 
 
         ICommand _ColorCommand;
-        private string filter;
+
 
         public ICommand ColorCommand
         {

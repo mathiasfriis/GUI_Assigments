@@ -60,6 +60,7 @@
     <Compile Include="AgentWindow.xaml.cs">
       <DependentUpon>AgentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Repository.cs" />
     <Compile Include="Specialities.cs" />
     <Page Include="AgentWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
