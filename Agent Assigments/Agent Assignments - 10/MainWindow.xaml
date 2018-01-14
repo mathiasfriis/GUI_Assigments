@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Agent_Assignments"
         mc:Ignorable="d"
-        Title="MainWindow" Height="195.961" Width="525" MinHeight="290" MinWidth="700">
+        Title="MainWindow" Height="195.961" Width="525" MinHeight="290" MinWidth="750">
     <Window.Resources>
-        <local:Agents x:Key="agents" />
         <local:Specialities x:Key="specialities" />
         
         <SolidColorBrush x:Key="BackgroundBrush" Color="AliceBlue"/>
@@ -68,7 +67,7 @@
         </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
-        <local:Agents/>
+        <local:Agents x:Name="agents"/>
     </Window.DataContext>
     <DockPanel Name="DockPanelMain">
         <Menu DockPanel.Dock="Top" Name="mainMenu">
@@ -150,10 +149,12 @@
                       ItemsSource="{Binding Source={StaticResource specialities}}" 
                       SelectedItem="{Binding Path=Speciality}"/>
             <TextBox Style="{StaticResource ResourceKey=TextBox_style}" x:Name="TB_Assignment" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,14,0,0" TextWrapping="Wrap" Text="{Binding Path=Assignment}" VerticalAlignment="Top" Width="120" Grid.Row="3" AcceptsReturn="True" />
-            <DataGrid ItemsSource="{Binding}"
-                 IsSynchronizedWithCurrentItem="True" SelectedIndex="{Binding Path=CurrentIndex}"
+            <DataGrid ItemsSource="{Binding }" 
+                       IsSynchronizedWithCurrentItem="True"
+                       SelectedIndex="{Binding Path=CurrentIndex}"
+                       SelectedItem="{Binding Path=CurrentAgent}"
                  Grid.Column="2" HorizontalAlignment="Left" Margin="0" Grid.RowSpan="4" VerticalAlignment="Stretch" Width="Auto"
-                     ItemTemplate="{StaticResource ResourceKey=AgentTemplate}"/>
+                      IsReadOnly="True" MouseDoubleClick="DataGrid_MouseDoubleClick"/>
         </Grid>
     </DockPanel>
 </Window>

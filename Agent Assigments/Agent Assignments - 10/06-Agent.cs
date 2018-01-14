@@ -118,9 +118,9 @@ namespace Agent_Assignments
         }
         #endregion
 
-    #region Commands
+         #region Commands
 
-    ICommand _nextCommand;
+        ICommand _nextCommand;
         public ICommand NextCommand
         {
             get
@@ -162,6 +162,35 @@ namespace Agent_Assignments
             NotifyPropertyChanged("Count");
             CurrentIndex = Count - 1;
         }
+
+
+        ICommand _editCommand;
+        public ICommand EditCommand
+        {
+            get { return _editCommand ?? (_editCommand = new RelayCommand(EditAgent, DeleteAgent_CanExecute)); }
+        }
+
+        private void EditAgent()
+        {
+            // Show Modal Dialog
+            var dlg = new AgentWindow();
+            dlg.Title = "Edit Agent";
+            // Need a temp agent in case of cancel
+            Agent tempAgent = new Agent();
+            tempAgent.ID = CurrentAgent.ID;
+            tempAgent.CodeName = currentAgent.CodeName;
+            tempAgent.Speciality = currentAgent.Speciality;
+            tempAgent.Assignment = currentAgent.Assignment;
+            dlg.DataContext = tempAgent;
+            if (dlg.ShowDialog() == true)
+            {
+                CurrentAgent.ID = tempAgent.ID;
+                currentAgent.CodeName = tempAgent.CodeName;
+                currentAgent.Speciality = tempAgent.Speciality;
+                currentAgent.Assignment = tempAgent.Assignment;
+            }
+        }
+
 
         ICommand _deleteCommand;
         public ICommand DeleteCommand

@@ -57,7 +57,14 @@
     <Compile Include="06-Agent.cs" />
     <Compile Include="06-RelayCommand.cs" />
     <Compile Include="AgentIdToColorValueConverter.cs" />
+    <Compile Include="AgentWindow.xaml.cs">
+      <DependentUpon>AgentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Specialities.cs" />
+    <Page Include="AgentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

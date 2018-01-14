@@ -1,0 +1,61 @@
+﻿<Window x:Class="Agent_Assignments.AgentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Agent_Assignments"
+        Height="300" Width="300"
+        WindowStartupLocation="CenterOwner"
+        FocusManager.FocusedElement="{Binding ElementName=tbxId}"
+        ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="ToolWindow" 
+        >
+    <Window.Resources>
+        <local:Specialities x:Key="specialities" />
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Width" Value="92" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Label Margin="0,8,0,0">Id</Label>
+        <Label Margin="0,37,0,0">CodeName</Label>
+        <Label Margin="0,72,0,0">Speciality</Label>
+        <Label Margin="0,109,0,0">Assignment</Label>
+        <TextBox Height="25" Margin="92,8,0,0" Name="tbxId" TabIndex="0"
+                 VerticalAlignment="Top" HorizontalAlignment="Left" Width="31" MaxLength="3" 
+                 Text="{Binding Path=ID}"
+                 />
+        <TextBox Height="25" Margin="92,39,14,0" Name="tbxCodeName"  
+                 TabIndex="1"
+                 VerticalAlignment="Top" 
+                 Text="{Binding Path=CodeName}"
+                 />
+        <ComboBox Height="23" Margin="92,77,14,0" Name="cbxSpecialities" VerticalAlignment="Top"
+                  TabIndex="2"
+                  ItemsSource="{Binding Source={StaticResource specialities}}" 
+                  SelectedItem="{Binding Path=Speciality}"
+                  />
+        <TextBox Margin="92,109,14,0" Name="tbxAssignment" 
+                 TabIndex="3"
+                 Height="111" 
+                 VerticalAlignment="Top" 
+                 AcceptsReturn="True"
+                 Text="{Binding Path=Assignment}" 
+                 />
+        <Button IsDefault="True" 
+                TabIndex="4"
+                Margin="92,0,111,12" 
+                Name="btnOk" 
+                VerticalAlignment="Bottom" 
+                Click="btnOk_Click">_Ok</Button>
+        <Button IsCancel="True" 
+                TabIndex="5"
+                Margin="0,0,14,12" 
+                Name="btnCancel" 
+                HorizontalAlignment="Right" 
+                Width="75" 
+                VerticalAlignment="Bottom">_Cancel</Button>
+
+    </Grid>
+</Window>

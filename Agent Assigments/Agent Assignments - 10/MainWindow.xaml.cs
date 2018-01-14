@@ -65,5 +65,11 @@ namespace Agent_Assigments
                 }
             }
         }
+
+        private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(agents.Count>0)
+            agents.EditCommand.Execute(new Object());
+        }
     }
 }
