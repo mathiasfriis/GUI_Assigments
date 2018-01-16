@@ -176,5 +176,10 @@ namespace Mathias_Loenborg_Friis_201505665
         {
             return (Transaction)Resources["currentTransaction"];
         }
+
+        private void ExitClicked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

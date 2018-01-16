@@ -196,8 +196,37 @@ namespace Mathias_Loenborg_Friis_201505665.Models
         }
         #endregion
 
-        #region OpenTransactionCommand
-        ICommand _OpenTransactionCommand;
+        #region NewTransactionCommand
+        ICommand _newTransactionCommand;
+        public ICommand NewTransactionCommand
+        {
+            get
+            {
+                return _newTransactionCommand ?? (_newTransactionCommand = new RelayCommand(NewTransactionExecute, NewTransaction_CanExecute));
+            }
+        
+        }
+
+        private void NewTransactionExecute()
+        {
+            //Check if item with items ID already exists.
+
+            MessageBox.Show("NewTransExe");
+            Clear();
+
+            NotifyPropertyChanged("Count");
+            NotifyPropertyChanged("totalPrice");
+            CurrentIndex = Count - 1;
+        }
+
+    private bool NewTransaction_CanExecute()
+    {
+            return true;
+    }
+    #endregion
+
+    #region OpenTransactionCommand
+    ICommand _OpenTransactionCommand;
         public ICommand OpenTransactionCommand
         {
             get { return _OpenTransactionCommand ?? (_OpenTransactionCommand = new RelayCommand<string>(OpenTransactionCommand_Execute)); }

@@ -32,25 +32,20 @@
                 <MenuItem Header="Catalogue">
                     <MenuItem Header="_New Catalogue" Command="{Binding NewCatalogueCommand}"/>
                     <MenuItem Header="_Open Catalogue..." Command="{Binding Source={StaticResource itemCatalogue}, Path=OpenCatalogueCommand}" Click="_menuItemOpenCatalogue"/>
-                    <MenuItem Header="_Save Catalogue"/>
                     <MenuItem Header="_Save Catalogue as..." Command="{Binding Source={StaticResource itemCatalogue}, Path=SaveCatalogueAsCommand}" Click="_menuItemSaveCatalogueAs"/>
                 </MenuItem>
                 <MenuItem Header="Transaction List">
-                    <MenuItem Header="_New Transaction" Command="{Binding NewTransactionListCommand}"/>
+                    <MenuItem Header="_New Transaction" Command="{Binding Source={StaticResource currentTransaction}, Path=NewTransactionCommand}"/>
                     <MenuItem Header="_Open Transaction..." Command="{Binding Source={StaticResource currentTransaction}, Path=OpenTransactionCommand}" Click="_menuItemOpenTransaction"/>
-                    <MenuItem Header="_Save Transaction" Command="{Binding SaveTransactionListCommand}"/>
                     <MenuItem Header="_Save Transaction as ..." Command="{Binding Source={StaticResource currentTransaction}, Path=SaveTransactionAsCommand}" Click="_menuItemSaveTransactionAs"/>
                 </MenuItem>
 
-                <MenuItem Header="E_xit" Command="{Binding CloseAppCommand}"/>
+                <MenuItem Header="E_xit" Click="ExitClicked" />
             </MenuItem>
             <MenuItem Header="Catalogue">
                 <MenuItem Header="_Add new item" Click="Menu_NewItem_Click"/>
                 <MenuItem Header="_Delete item" Command="{Binding Source={StaticResource itemCatalogue}, Path=DeleteItemCommand}"/>
                 <MenuItem Header="_Edit item" Click="Menu_EditItem_Click"/>
-            </MenuItem>
-            <MenuItem Header="Transactions">
-                <MenuItem Header="New Transaction" Command="{Binding ColorCommand}" CommandParameter="Green"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Height="auto" HorizontalAlignment="Stretch">
