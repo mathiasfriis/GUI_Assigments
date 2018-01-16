@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <students>
+    <Student>
+      <Name>Johnny Cigar</Name>
+      <Grade>7</Grade>
+      <ID>88</ID>
+    </Student>
+    <Student>
+      <Name>Mathias</Name>
+      <Grade>12</Grade>
+      <ID>1337</ID>
+    </Student>
+    <Student>
+      <Name>Eddie</Name>
+      <Grade>2</Grade>
+      <ID>123</ID>
+    </Student>
+  </students>
+</Students>
