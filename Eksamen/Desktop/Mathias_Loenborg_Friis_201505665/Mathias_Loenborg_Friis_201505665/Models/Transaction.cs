@@ -248,9 +248,16 @@ namespace Mathias_Loenborg_Friis_201505665.Models
                 try
                 {
                     TextReader reader = new StreamReader(filename);
-                    CashReceived = int.Parse(reader.ReadLine());
-                    CashBack = int.Parse(reader.ReadLine());
+                   
+                    int cashRec = int.Parse(reader.ReadLine());
+                    int cashBac = int.Parse(reader.ReadLine());
                     PaymentMethod = reader.ReadLine();
+
+                    if(PaymentMethod.Equals("Cash"))
+                    {
+                        CashReceived = cashRec;
+                        CashBack = cashBac;
+                    }
                     // Deserialize all items.
                     tempTransaction = (Transaction)serializer.Deserialize(reader);
                     reader.Close();
