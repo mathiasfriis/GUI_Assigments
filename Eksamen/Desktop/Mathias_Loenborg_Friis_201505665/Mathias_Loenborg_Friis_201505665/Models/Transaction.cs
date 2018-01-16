@@ -35,8 +35,10 @@ namespace Mathias_Loenborg_Friis_201505665.Models
 
         int currentIndex = -1;
 
-        public int cashReceived { get; set; } = 0; //cash received if paymentMethod = cash
-        public int cashBack { get; set; } = 0; //cash back if paymentMethod = cash
+        private int cashReceived { get; set; } = 0; //cash received if paymentMethod = cash
+        private int cashBack { get; set; } = 0; //cash back if paymentMethod = cash
+        private String paymentMethod { get; set; } = "Not paid";
+
         ///Get total price of transaction.
         public int totalPrice
         {
@@ -51,6 +53,19 @@ namespace Mathias_Loenborg_Friis_201505665.Models
             }
         }
 
+        public String PaymentMethod
+        {
+            get { return paymentMethod; }
+            set
+            {
+                if (paymentMethod != value)
+                {
+                    paymentMethod = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public int CurrentIndex
         {
             get { return currentIndex; }
@@ -62,6 +77,26 @@ namespace Mathias_Loenborg_Friis_201505665.Models
                     NotifyPropertyChanged();
                 }
             }
+        }
+
+        public int CashReceived
+        {
+            get { return cashReceived; }
+            set
+            {
+                if (cashReceived != value)
+                {
+                    cashReceived = value;
+                    cashBack = cashReceived - totalPrice;
+                    NotifyPropertyChanged();
+                    NotifyPropertyChanged("CashBack");
+                }
+            }
+        }
+
+        public int CashBack
+        {
+            get { return cashBack; }
         }
 
         Item currentItem = null;

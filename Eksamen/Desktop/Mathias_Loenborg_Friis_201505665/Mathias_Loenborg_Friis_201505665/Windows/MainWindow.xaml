@@ -116,7 +116,7 @@
                     <DataGridTextColumn Header="Price Pr. Unit(DKK)" IsReadOnly="True" Binding="{Binding Path=Price}" Width="2*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
                     <DataGridTextColumn Header="Quantity" IsReadOnly="True" Binding="{Binding Path=Quantity}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
                     <DataGridTextColumn Header="Price(DKK)" IsReadOnly="True" Binding="{Binding Path=TotalPrice}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
-                   
+
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -126,7 +126,10 @@
             </DataGrid>
 
             <Button Content="Pay" Grid.Column="1" HorizontalAlignment="Left" Margin="195,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="PayButton_Click"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"/>
+            <ComboBox x:Name="cbPaymentMethod" Grid.Column="1" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" IsSynchronizedWithCurrentItem="True">
+                <ComboBoxItem Tag="cbiCash" Content="Cash"/>
+                <ComboBoxItem Tag="cbiMobilePay" Content="MobilePay"/>
+            </ComboBox>
             <Grid HorizontalAlignment="Left" Height="84" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="497" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -134,23 +137,30 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150*"/>
-                    <ColumnDefinition Width="130*"/>
-                    <ColumnDefinition Width="217*"/>
+                    <ColumnDefinition Width="114*"/>
+                    <ColumnDefinition Width="136*"/>
+                    <ColumnDefinition Width="55*"/>
+                    <ColumnDefinition Width="auto" MinWidth="106"/>
+                    <ColumnDefinition Width="86*"/>
                 </Grid.ColumnDefinitions>
-                
-                <Label Content="Total Price:" Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12"/>
-                <Label Content="Cash Received:" Grid.Row="1" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12"/>
-                <Label Content="Cash Back:" Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12"/>
 
-                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=totalPrice}" FontWeight="Bold" FontSize="12" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=cashReceived}" FontWeight="Bold" FontSize="12" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=cashBack}" FontWeight="Bold" FontSize="12" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Label Content="Total Price:" Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12" Width="72"/>
+                <Label Content="Cash Received:" Grid.Row="1" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12" Width="93"/>
+                <Label Content="Cash Back:" Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12" Width="70"/>
 
-                <Label Content="kr." Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12"/>
-                <Label Content="kr." Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12"/>
-                <Label Content="kr." Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12"/>
+                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=totalPrice}" FontWeight="Bold" FontSize="12" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6,1,6" Height="auto" Width="auto"/>
+                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=CashReceived}" FontWeight="Bold" FontSize="12" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6,1,6" Height="auto" Width="auto"/>
+                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=CashBack}" FontWeight="Bold" FontSize="12" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,6,1,6" Height="auto" Width="auto"/>
+
+                <Label Content="kr." Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" Width="24"/>
+                <Label Content="kr." Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" Width="24"/>
+                <Label Content="kr." Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" Width="24"/>
+
+                <Label Content="Paid with:" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" Width="101"/>
+
+                <Label Content="{Binding Source={StaticResource currentTransaction}, Path=PaymentMethod}" Grid.Column="4" HorizontalAlignment="Center" FontWeight="Bold" Grid.Row="0" Width="auto" Margin="0"/>
             </Grid>
+
 
         </Grid>
     </DockPanel>

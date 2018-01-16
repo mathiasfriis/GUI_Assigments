@@ -1,4 +1,5 @@
 ﻿using Mathias_Loenborg_Friis_201505665.Models;
+using Mathias_Loenborg_Friis_201505665.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,34 @@ namespace Mathias_Loenborg_Friis_201505665
 
         private void PayButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                string PaymentMethod = cbPaymentMethod.Text.ToString();
 
+                Transaction currentTransaction = (Transaction)Resources["currentTransaction"];
+
+                currentTransaction.PaymentMethod = PaymentMethod;
+
+                if (PaymentMethod == "Cash")
+                {
+                    //create Window to prompt user for data.
+                    var payCashWindow = new payCashWindow();
+
+                    //if 'OK' pressed
+                    if (payCashWindow.ShowDialog() == true)
+                    {
+                        //Get data from create-window.
+                        int cashPaid = payCashWindow.cashPaid;
+                        currentTransaction.CashReceived = cashPaid;
+
+                    }
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Please choose payment method");
+            }
         }
 
         private void Menu_NewItem_Click(object sender, RoutedEventArgs e)
