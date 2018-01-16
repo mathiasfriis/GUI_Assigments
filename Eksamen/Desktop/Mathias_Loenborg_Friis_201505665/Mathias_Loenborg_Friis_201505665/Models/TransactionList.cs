@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Mathias_Loenborg_Friis_201505665.Models
@@ -14,6 +15,15 @@ namespace Mathias_Loenborg_Friis_201505665.Models
     public class TransactionList : ObservableCollection<Transaction>, INotifyPropertyChanged
     {
         public List<Transaction> Transactions = new List<Transaction>();
+
+        public TransactionList()
+        {
+            if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
+            {
+                AddTransaction();
+            }
+            AddTransaction();
+        }
 
         #region Properties
 
@@ -66,7 +76,8 @@ namespace Mathias_Loenborg_Friis_201505665.Models
 
         private void AddTransaction()
         {
-            Add(new Transaction());
+            MessageBox.Show("Adding new Transaction");
+            Transactions.Add(new Transaction());
             NotifyPropertyChanged("Count");
             CurrentIndex = Count - 1;
         }

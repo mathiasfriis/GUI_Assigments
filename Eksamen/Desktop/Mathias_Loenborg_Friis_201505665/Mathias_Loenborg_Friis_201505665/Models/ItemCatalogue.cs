@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Mathias_Loenborg_Friis_201505665.Models
@@ -14,6 +15,19 @@ namespace Mathias_Loenborg_Friis_201505665.Models
     public class ItemCatalogue : ObservableCollection<Item>, INotifyPropertyChanged
     {
         public List<Item> Transactions = new List<Item>();
+
+        public ItemCatalogue()
+        {
+            if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
+            {
+                Add(new Item(001, "Pølse med brød", 10));
+                Add(new Item(002, "Hotdog", 20));
+                Add(new Item(003, "Fransk Hotdog", 15));
+                Add(new Item(004, "Cocio", 15));
+                Add(new Item(005, "Sodavand", 15));
+                Add(new Item(006, "100g rent guld", 10000));
+            }
+        }
 
         #region Properties
 
@@ -57,16 +71,20 @@ namespace Mathias_Loenborg_Friis_201505665.Models
         {
             get
             {
-                return _newItemCommand ?? (_newItemCommand = new RelayCommand(
-                    () => AddItem(),
-                    () => true
-                    ));
+                return _newItemCommand ?? (_newItemCommand = new RelayCommand<Item>(AddItemExecute));
             }
         }
 
-        private void AddItem()
+        private void AddItemExecute(Item item)
         {
-            Add(new Item(0, "N/A", 0));
+            if(item==null)
+            {
+                Add(new Item(0, "N/A", 0));
+            }
+            else
+            {
+                Add(item);
+            }
             NotifyPropertyChanged("Count");
             CurrentIndex = Count - 1;
         }

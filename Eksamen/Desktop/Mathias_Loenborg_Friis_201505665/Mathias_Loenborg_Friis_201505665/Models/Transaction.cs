@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace Mathias_Loenborg_Friis_201505665.Models
 {
-    public class Transaction
+    public class Transaction: ObservableCollection<Item>, INotifyPropertyChanged
     {
-        List<Item> items = new List<Item>(); //List of all items including price, ID and name.
-        Dictionary<string, int> itemQuantities = new Dictionary<string, int>(); //Keeps track of quantity of items. Key=name, Value=quantity.
+        public List<Item> items = new List<Item>(); //List of all items including price, ID and name.
+        public Dictionary<string, int> itemQuantities = new Dictionary<string, int>(); //Keeps track of quantity of items. Key=name, Value=quantity.
         public enum Payment { notPaid, Cash, MobilePay }; //enum to keep track of paid/not paid + payment method.
-        Payment paymentMethod = Payment.notPaid;
+        public Payment paymentMethod = Payment.notPaid;
         int cashReceived = 0; //cash received if paymentMethod = cash
         int cashBack = 0; //cash back if paymentMethod = cash
         ///Get total price of transaction.
@@ -29,11 +32,25 @@ namespace Mathias_Loenborg_Friis_201505665.Models
             }
         }
 
+        public Transaction()
+        {
+            if ((bool)(DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue))
+            {
+                
+                AddItem(new Item(1, "Hotter", 10));
+                AddItem(new Item(1, "Hotter", 10));
+                AddItem(new Item(2, "Cocio", 15));
+            }
+            
+            AddItem(new Item(1, "Hotter", 10));
+            AddItem(new Item(1, "Hotter", 10));
+            AddItem(new Item(2, "Cocio", 15));
+        }
 
         //Add item to transaction.
         public void AddItem(Item item)
         {
-            items.Add(item);
+            Add(item);
             if (itemQuantities.ContainsKey(item.Name))
             {
                 itemQuantities[item.Name]++;
@@ -112,5 +129,20 @@ namespace Mathias_Loenborg_Friis_201505665.Models
             MessageBox.Show("Paid with MobilePay.");
             return true;
         }
+
+
+        #region INotifyPropertyChanged implementation
+
+        public new event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }
