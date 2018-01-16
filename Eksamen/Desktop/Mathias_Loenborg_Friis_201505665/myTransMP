@@ -1,6 +1,6 @@
 50
 5
-Cash
+MobilePay
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTransactionItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TransactionItem>

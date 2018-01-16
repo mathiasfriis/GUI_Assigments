@@ -98,23 +98,31 @@ namespace Mathias_Loenborg_Friis_201505665
 
             int index = items.CurrentIndex;
 
-            //create Window to prompt user for data.
-            var editItemWindow = new EditItemWindow(items[index]);
-
-            //if 'OK' pressed
-            if (editItemWindow.ShowDialog() == true)
+            try
             {
-                //Get data from create-window.
-                int ID = editItemWindow.ID;
-                string Name = editItemWindow.Name;
-                int Price = editItemWindow.Price;
+                //create Window to prompt user for data.
+                var editItemWindow = new EditItemWindow(items[index]);
 
-                //Create new item with data.
-                Item item = new Item(ID, Name, Price);
+                //if 'OK' pressed
+                if (editItemWindow.ShowDialog() == true)
+                {
+                    //Get data from create-window.
+                    int ID = editItemWindow.ID;
+                    string Name = editItemWindow.Name;
+                    int Price = editItemWindow.Price;
 
-                //Replace item with edited item.
-                items[index] = item;
+                    //Create new item with data.
+                    Item item = new Item(ID, Name, Price);
+
+                    //Replace item with edited item.
+                    items[index] = item;
+                }
             }
+            catch
+            {
+                MessageBox.Show("Please choose an item from the catalogue to edit.");
+            }
+            
         }
 
         private void _menuItemSaveCatalogueAs(object sender, RoutedEventArgs e)

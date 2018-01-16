@@ -109,8 +109,9 @@
                 https://stackoverflow.com/questions/30131363/grid-with-datagrid-resizing-in-wpf
                 -->
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding Path=ID}" Width="1*" />
                     <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Path=Name}" Width="2*" />
-                    <DataGridTextColumn Header="Price Pr. Unit(DKK)" IsReadOnly="True" Binding="{Binding Path=Price}" Width="2*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
+                    <DataGridTextColumn Header="Price Pr. Unit(DKK)" IsReadOnly="True" Binding="{Binding Path=Price}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
                     <DataGridTextColumn Header="Quantity" IsReadOnly="True" Binding="{Binding Path=Quantity}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
                     <DataGridTextColumn Header="Price(DKK)" IsReadOnly="True" Binding="{Binding Path=TotalPrice}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
 

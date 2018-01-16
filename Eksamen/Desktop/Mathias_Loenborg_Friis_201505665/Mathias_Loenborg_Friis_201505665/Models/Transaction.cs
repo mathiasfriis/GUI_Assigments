@@ -98,6 +98,7 @@ namespace Mathias_Loenborg_Friis_201505665.Models
         public int CashBack
         {
             get { return cashBack; }
+            set { cashBack = value; }
         }
 
         Item currentItem = null;
@@ -247,6 +248,9 @@ namespace Mathias_Loenborg_Friis_201505665.Models
                 try
                 {
                     TextReader reader = new StreamReader(filename);
+                    CashReceived = int.Parse(reader.ReadLine());
+                    CashBack = int.Parse(reader.ReadLine());
+                    PaymentMethod = reader.ReadLine();
                     // Deserialize all items.
                     tempTransaction = (Transaction)serializer.Deserialize(reader);
                     reader.Close();
@@ -259,9 +263,15 @@ namespace Mathias_Loenborg_Friis_201505665.Models
                 // We have to insert the items in the existing collection. 
                 Clear();
                 foreach (var Item in tempTransaction)
+                {
                     Add(Item);
+                    itemQuantities[Item.ID] = Item.Quantity;
+                }
 
+
+                NotifyPropertyChanged("totalPrice");
                 NotifyPropertyChanged("Count");
+                NotifyPropertyChanged("CashBack");
             }
         }
         #endregion
@@ -294,6 +304,9 @@ namespace Mathias_Loenborg_Friis_201505665.Models
             // Create an instance of the XmlSerializer class and specify the type of object to serialize.
             XmlSerializer serializer = new XmlSerializer(typeof(Transaction));
             TextWriter writer = new StreamWriter(filename);
+            writer.WriteLine(cashReceived);
+            writer.WriteLine(cashBack);
+            writer.WriteLine(paymentMethod);
             // Serialize all items.
             serializer.Serialize(writer, this);
             writer.Close();
