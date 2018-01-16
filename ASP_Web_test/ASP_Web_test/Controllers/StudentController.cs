@@ -124,7 +124,7 @@ namespace ASP_Web_test.Controllers
             List<Student> students = new List<Student>();
             Student s = new Student();
             s.Name = "Student read from file";
-            s.Grade = 4;
+            s.Quantity = 4;
             students.Add(s);
             return students;
         }

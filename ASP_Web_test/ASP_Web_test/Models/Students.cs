@@ -30,7 +30,7 @@ namespace ASP_Web_test.Models
             int sum = 0;
             foreach(Student s in students)
             {
-                sum += s.Grade;
+                sum += s.Quantity;
             }
             float avg = sum / students.Count;
             return avg;
