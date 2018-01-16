@@ -9,8 +9,7 @@
         Title="TransactionTracker-9001" Height="450" Width="525" MinHeight="400" MinWidth="750" MaxHeight="800" MaxWidth="700">
     <Window.Resources>
         <models:ItemCatalogue x:Key="itemCatalogue"/>
-        <models:TransactionList x:Key="transactionList"/>
-        <models:Transaction x:Key="currentTransasction"/>
+        <models:Transaction x:Key="currentTransaction"/>
 
         <DataTemplate x:Key="TransactionItem">
             <WrapPanel>
@@ -81,15 +80,15 @@
                 https://stackoverflow.com/questions/30131363/grid-with-datagrid-resizing-in-wpf
                 -->
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding Path=ID}" Width="1*"/>
+                    <DataGridTextColumn x:Name="___No_Name_" Header="ID" IsReadOnly="True" Binding="{Binding Path=ID}" Width="1*"/>
                     <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Path=Name}" Width="3*" />
                     <DataGridTextColumn Header="Price(DKK)" IsReadOnly="True" Binding="{Binding Path=Price}" Width="2*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
                     <DataGridTemplateColumn Width="1.5*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="+" Background="#FFCEFBD8" FontWeight="Bold" Click="addItemToTransActionButton" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
-                                    <Button Content="-" Background="#FFFBCECE" FontWeight="Bold" Click="removeItemFromTransActionButton" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
+                                    <Button Content="+" Background="#FFCEFBD8" FontWeight="Bold" Command="{Binding Source={StaticResource currentTransaction}, Path=AddItemCommand}" CommandParameter="{Binding}" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
+                                    <Button Content="-" Background="#FFFBCECE" FontWeight="Bold" Command="{Binding Source={StaticResource currentTransaction}, Path=RemoveItemCommand}" CommandParameter="{Binding}" Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -106,7 +105,7 @@
             <DataGrid x:Name="CurrentTransactionList" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,30,10,10" AutoGenerateColumns="False" VerticalAlignment="Stretch" 
                       CanUserResizeColumns="True" CanUserReorderColumns="False" CanUserSortColumns="True" SelectionMode="Single" CanUserDeleteRows="False" 
                       CanUserAddRows="False" CanUserResizeRows="True" HeadersVisibility="Column" 
-                      ItemsSource="{Binding Source={StaticResource currentTransasction}}"
+                      ItemsSource="{Binding Source={StaticResource currentTransaction}}"
                       SelectedIndex="{Binding Source={StaticResource itemCatalogue}, Path=CurrentIndex}">
                 <!--
                 Used DataGrid.Columns to avoid blank space when stretching datagrid to fit grid.
@@ -115,8 +114,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Path=Name}" Width="2*" />
                     <DataGridTextColumn Header="Price Pr. Unit(DKK)" IsReadOnly="True" Binding="{Binding Path=Price}" Width="2*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
-                    <DataGridTextColumn Header="Quantity" IsReadOnly="True" Binding="{Binding Path=Price}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
-                    <DataGridTextColumn Header="Price(DKK)" IsReadOnly="True" Binding="{Binding Path=Price}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
+                    <DataGridTextColumn Header="Quantity" IsReadOnly="True" Binding="{Binding Path=Quantity}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
+                    <DataGridTextColumn Header="Price(DKK)" IsReadOnly="True" Binding="{Binding Path=TotalPrice}" Width="1*" CellStyle="{StaticResource DataGridCellRightAlign}"/>
                    
                 </DataGrid.Columns>
                 <DataGrid.Resources>
@@ -144,11 +143,13 @@
                 <Label Content="Cash Received:" Grid.Row="1" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12"/>
                 <Label Content="Cash Back:" Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold" FontSize="12"/>
 
+                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=totalPrice}" FontWeight="Bold" FontSize="12" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=cashReceived}" FontWeight="Bold" FontSize="12" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Source={StaticResource currentTransaction}, Path=cashBack}" FontWeight="Bold" FontSize="12" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
                 <Label Content="kr." Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12"/>
                 <Label Content="kr." Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12"/>
                 <Label Content="kr." Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12"/>
-
-                <TextBlock Text="{Binding Source={StaticResource currentTransasction}, Path=totalPrice}"/>
             </Grid>
 
         </Grid>

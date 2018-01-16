@@ -14,7 +14,7 @@ namespace Mathias_Loenborg_Friis_201505665.Models
 {
     public class ItemCatalogue : ObservableCollection<Item>, INotifyPropertyChanged
     {
-        public List<Item> Transactions = new List<Item>();
+        public List<Item> Items = new List<Item>();
 
         public ItemCatalogue()
         {
@@ -27,6 +27,12 @@ namespace Mathias_Loenborg_Friis_201505665.Models
                 Add(new Item(005, "Sodavand", 15));
                 Add(new Item(006, "100g rent guld", 10000));
             }
+            Add(new Item(001, "Pølse med brød", 10));
+            Add(new Item(002, "Hotdog", 20));
+            Add(new Item(003, "Fransk Hotdog", 15));
+            Add(new Item(004, "Cocio", 15));
+            Add(new Item(005, "Sodavand", 15));
+            Add(new Item(006, "100g rent guld", 10000));
         }
 
         #region Properties
