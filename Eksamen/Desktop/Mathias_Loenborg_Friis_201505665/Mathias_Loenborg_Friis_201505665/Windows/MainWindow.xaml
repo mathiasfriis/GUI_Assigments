@@ -30,7 +30,7 @@
             <MenuItem Header="Files">
                 <Separator/>
                 <MenuItem Header="Catalogue">
-                    <MenuItem Header="_New Catalogue" Command="{Binding NewCatalogueCommand}"/>
+                    <MenuItem Header="_New Catalogue" Command="{Binding Source={StaticResource itemCatalogue}, Path=NewCatalogueCommand}"/>
                     <MenuItem Header="_Open Catalogue..." Command="{Binding Source={StaticResource itemCatalogue}, Path=OpenCatalogueCommand}" Click="_menuItemOpenCatalogue"/>
                     <MenuItem Header="_Save Catalogue as..." Command="{Binding Source={StaticResource itemCatalogue}, Path=SaveCatalogueAsCommand}" Click="_menuItemSaveCatalogueAs"/>
                 </MenuItem>

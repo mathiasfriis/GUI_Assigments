@@ -209,9 +209,6 @@ namespace Mathias_Loenborg_Friis_201505665.Models
 
         private void NewTransactionExecute()
         {
-            //Check if item with items ID already exists.
-
-            MessageBox.Show("NewTransExe");
             Clear();
 
             NotifyPropertyChanged("Count");
@@ -252,10 +249,6 @@ namespace Mathias_Loenborg_Friis_201505665.Models
                     TextReader reader = new StreamReader(filename);
                     // Deserialize all items.
                     tempTransaction = (Transaction)serializer.Deserialize(reader);
-                    foreach (TransactionItem i in tempTransaction)
-                    {
-                        MessageBox.Show(i.Name);
-                    }
                     reader.Close();
                 }
                 catch (Exception ex)

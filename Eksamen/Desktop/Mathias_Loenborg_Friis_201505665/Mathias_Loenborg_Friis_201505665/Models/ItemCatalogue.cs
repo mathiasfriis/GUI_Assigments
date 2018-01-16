@@ -168,10 +168,6 @@ namespace Mathias_Loenborg_Friis_201505665.Models
                     TextReader reader = new StreamReader(filename);
                     // Deserialize all items.
                     tempCatalogue = (ItemCatalogue)serializer.Deserialize(reader);
-                    foreach(Item i in tempCatalogue)
-                    {
-                        MessageBox.Show(i.Name);
-                    }
                     reader.Close();
                 }
                 catch (Exception ex)
@@ -210,6 +206,32 @@ namespace Mathias_Loenborg_Friis_201505665.Models
             }
         }
 
+        #endregion
+
+        #region NewCatalogueCommand
+        ICommand _newCatalogueCommand;
+        public ICommand NewCatalogueCommand
+        {
+            get
+            {
+                return _newCatalogueCommand ?? (_newCatalogueCommand = new RelayCommand(NewCatalogueExecute, NewCatalogue_CanExecute));
+            }
+
+        }
+
+        private void NewCatalogueExecute()
+        {
+            Clear();
+
+            NotifyPropertyChanged("Count");
+            NotifyPropertyChanged("totalPrice");
+            CurrentIndex = Count - 1;
+        }
+
+        private bool NewCatalogue_CanExecute()
+        {
+            return true;
+        }
         #endregion
 
         public void SaveFileCommand_Execute()

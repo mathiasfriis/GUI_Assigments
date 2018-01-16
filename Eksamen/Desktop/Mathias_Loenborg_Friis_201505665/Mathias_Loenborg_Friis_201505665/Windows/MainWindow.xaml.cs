@@ -123,7 +123,6 @@ namespace Mathias_Loenborg_Friis_201505665
             if(saveFileDialog.ShowDialog()==true)
             {
                 string filename = saveFileDialog.FileName.ToString();
-                MessageBox.Show("Saving to file:" + filename);
                 ItemCatalogue catalogue = getItemCatalogue();
                 catalogue.filename = filename;
 
@@ -136,7 +135,6 @@ namespace Mathias_Loenborg_Friis_201505665
             if (openFileDialog.ShowDialog() == true)
             {
                 string filename = openFileDialog.FileName.ToString();
-                MessageBox.Show("Opening file:" + filename);
                 ItemCatalogue catalogue = getItemCatalogue();
                 catalogue.filename = filename;
             }
@@ -148,7 +146,6 @@ namespace Mathias_Loenborg_Friis_201505665
             if (saveFileDialog.ShowDialog() == true)
             {
                 string filename = saveFileDialog.FileName.ToString();
-                MessageBox.Show("Saving to file:" + filename);
                 Transaction transaction = getCurrentTransaction();
                 transaction.filename = filename;
 
@@ -161,7 +158,6 @@ namespace Mathias_Loenborg_Friis_201505665
             if (openFileDialog.ShowDialog() == true)
             {
                 string filename = openFileDialog.FileName.ToString();
-                MessageBox.Show("Opening file:" + filename);
                 Transaction transaction = getCurrentTransaction();
                 transaction.filename = filename;
             }
