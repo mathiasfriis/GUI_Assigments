@@ -27,26 +27,16 @@
 			</nav>
 
 			<div id="content">
-				<p>
-					The first Friday night each month at JavaJam is a special night. Join us from 8pm to 11pm for some music you won't want to miss.
-				</p>
-
-				<div id="splitbar">
-					January
-				</div>
-
-					<div id="centered20margin">
-						<img src="res/melaniethumb.jpg" alt="Melanie Morris" height="117" width="619"></h1>
-						Melanie Morris entertains with her melodic folk style. Check out the podcast! CDs are now available.
-					</div>
-
-				<div id="splitbar">
-					February
-				</div>
-					<div id="centered20margin">
-						<img src="res/gregthumb.jpg" alt="Tahoe Greg" height="117" width="619"></h1>
-						Tahoe Greg's back from his tour. New songs. New stories. CDs are now available.
-					</div>
+				<p>Want to work at JavaJam? Fill out the form below to start your application. Required fields are marked with an asterisk *.</p>
+           		<form method="post" action="http://webdevbasics.net/scripts/javajam.php">
+	                <label for="aName" >*Name:</label>
+	                <input type="text" name="aName" id="aName" required="required" />
+	                <label for="aEmail">*E-mail:</label>
+	                <input type="email" name="aEmail" id= "aEmail" required="required" /> 
+	                <label for="aExpirience">*Expirience:</label>
+	                <textarea name="aExpirience" id="aExpirience" rows="4" cols="30"></textarea>
+	                <input id="mySubmit" type="submit" value="Apply Now"/>
+            	</form>
 	 	 	</div>
 		</body>
 

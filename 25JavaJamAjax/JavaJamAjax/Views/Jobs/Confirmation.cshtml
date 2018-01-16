@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Confirmation";
+
+    var userData = "";
+
+    var dataFile = Server.MapPath("~/App_Data/data.txt");
+
+    if (File.Exists(dataFile))
+    {
+        userData = System.IO.File.ReadAllLines(dataFile).Last<string>();
+        if (userData == "")
+        {
+            // Empty file.
+            userData = "The file is empty.";
+        }
+    }
+    else
+    {
+        // File does not exist.
+        userData = "The file does not exist.";
+    }
+}
+
+<h3>Confirmation</h3>
+
+<i>We have received your application:</i>
+<p>@userData</p>
+
+

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaJam Coffee House - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("JavaJam Coffee House", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", null, new { id = "homeLink" })</li>
+                    <li><a href="/Home/Menu" id="menuLink">Menu</a></li> @*Just to show that you can use an oridinary anchor tag, if you prefer *@
+                    <li>@Html.ActionLink("Music", "Index", "Music", null, new { id = "musicLink" })</li>
+                    <li>@Html.ActionLink("Jobs", "Index", "Jobs", null, new { id = "jobsLink" })</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <header class="hidden-xs">
+            <h1>
+                JavaJam Coffee House
+            </h1>
+        </header>
+
+        <div id="content">
+            @RenderBody()
+        </div>
+
+        <footer>
+            <p>
+                Copyright &copy; 2015 JavaJam Coffee House<br />
+                <a href="mailto:yourfirstname@yourlastname.com">yourfirstname@yourlastname.com</a>
+            </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/JavaJam.js"></script>
+</body>
+</html>

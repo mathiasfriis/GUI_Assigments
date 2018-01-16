@@ -1,0 +1,29 @@
+﻿@model JavaJamAjax.Models.JobApplicant
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-md-12">
+        <p>&nbsp;</p>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1" id="jobForm">
+        <p>Want to work at JavaJam? Fill out the form below to start your application. Required fields are marked with an asterisk *.</p>
+
+        @using (Html.BeginForm())
+        {
+            <p>@Html.ValidationSummary(true)</p>
+            <p>@Html.LabelFor(x => x.Name) @Html.TextBoxFor(x => x.Name) * @Html.ValidationMessageFor(model => model.Name)</p>
+            <p>@Html.LabelFor(x => x.Email) @Html.EditorFor(x => x.Email) * @Html.ValidationMessageFor(model => model.Email)</p>
+            <p>@Html.LabelFor(x => x.Expirience) @Html.EditorFor(x => x.Expirience) * @Html.ValidationMessageFor(model => model.Expirience)</p>
+            <input id="submitJobApplication" type="submit" value="Apply Now" />
+        }
+    </div>
+</div>
+@section scripts {
+
+        @Scripts.Render("~/bundles/jqueryval")
+
+}

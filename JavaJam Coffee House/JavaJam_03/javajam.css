@@ -136,3 +136,25 @@ header, nav, figure, footer { display: block; }
 
 tr:nth-of-type(odd) { background-color: #ccaa66; }
 
+
+form {
+    padding: 10px;
+}
+
+label {
+    float: left;
+    width: 100px;
+    display: block;
+    text-align: right;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+
+input, textarea {
+    margin-top: 10px;
+    display: block;
+}
+
+#mySubmit {
+    margin-left: 110px;
+}
