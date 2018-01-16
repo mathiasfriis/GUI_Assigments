@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Mathias_Loenborg_Friis_201505665"
         xmlns:models="clr-namespace:Mathias_Loenborg_Friis_201505665.Models"
         mc:Ignorable="d"
-        Title="TransactionTracker-9001" Height="450" Width="525" MinHeight="400" MinWidth="750" MaxHeight="800" MaxWidth="700">
+        Title="TransactionTracker-9001" Height="450" Width="525" MinHeight="400" MinWidth="750" MaxHeight="800" MaxWidth="800">
     <Window.Resources>
         <models:ItemCatalogue x:Key="itemCatalogue"/>
         <models:Transaction x:Key="currentTransaction"/>
@@ -31,15 +31,15 @@
                 <Separator/>
                 <MenuItem Header="Catalogue">
                     <MenuItem Header="_New Catalogue" Command="{Binding NewCatalogueCommand}"/>
-                    <MenuItem Header="_Open Catalogue..." Command="{Binding OpenCatalogueCommand}"/>
-                    <MenuItem Header="_Save Catalogue" Command="{Binding SaveCatalogueCommand}"/>
-                    <MenuItem Header="_Save Catalogue as..." Command="{Binding OpenCatalogueCommand}"/>
+                    <MenuItem Header="_Open Catalogue..." Command="{Binding Source={StaticResource itemCatalogue}, Path=OpenCatalogueCommand}" Click="_menuItemOpenCatalogue"/>
+                    <MenuItem Header="_Save Catalogue"/>
+                    <MenuItem Header="_Save Catalogue as..." Command="{Binding Source={StaticResource itemCatalogue}, Path=SaveCatalogueAsCommand}" Click="_menuItemSaveCatalogueAs"/>
                 </MenuItem>
                 <MenuItem Header="Transaction List">
-                    <MenuItem Header="_New Transaction List" Command="{Binding NewTransactionListCommand}"/>
-                    <MenuItem Header="_Open Transaction List..." Command="{Binding OpenTransactionListCommand}"/>
-                    <MenuItem Header="_Save Transaction List" Command="{Binding SaveTransactionListCommand}"/>
-                    <MenuItem Header="_Save Transaction List ..." Command="{Binding OpenTransactionListCommand}"/>
+                    <MenuItem Header="_New Transaction" Command="{Binding NewTransactionListCommand}"/>
+                    <MenuItem Header="_Open Transaction..." Command="{Binding OpenTransactionListCommand}"/>
+                    <MenuItem Header="_Save Transaction" Command="{Binding SaveTransactionListCommand}"/>
+                    <MenuItem Header="_Save Transaction as ..." Command="{Binding OpenTransactionListCommand}"/>
                 </MenuItem>
 
                 <MenuItem Header="E_xit" Command="{Binding CloseAppCommand}"/>
@@ -47,6 +47,7 @@
             <MenuItem Header="Catalogue">
                 <MenuItem Header="_Add new item" Click="Menu_NewItem_Click"/>
                 <MenuItem Header="_Delete item" Command="{Binding Source={StaticResource itemCatalogue}, Path=DeleteItemCommand}"/>
+                <MenuItem Header="_Edit item" Click="Menu_EditItem_Click"/>
             </MenuItem>
             <MenuItem Header="Transactions">
                 <MenuItem Header="New Transaction" Command="{Binding ColorCommand}" CommandParameter="Green"/>
@@ -64,17 +65,18 @@
                 <RowDefinition Height="52*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="237*"/>
-                <ColumnDefinition Width="500*"/>
+                <ColumnDefinition Width="74*"/>
+                <ColumnDefinition Width="165*"/>
+                <ColumnDefinition Width="503*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Catalogue" Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+            <Label Content="Catalogue" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="2.067,0,77,0"/>
 
             <DataGrid x:Name="CountersList" Grid.Row="0" HorizontalAlignment="Stretch" Margin="10,30,10,10" AutoGenerateColumns="False" VerticalAlignment="Stretch" 
                       CanUserResizeColumns="True" CanUserReorderColumns="False" CanUserSortColumns="True" SelectionMode="Single" CanUserDeleteRows="False" 
-                      CanUserAddRows="False" CanUserResizeRows="True" HeadersVisibility="Column" 
+                      CanUserAddRows="False" CanUserResizeRows="True" HeadersVisibility="Column"
                       ItemsSource="{Binding Source={StaticResource itemCatalogue}}"
                       IsSynchronizedWithCurrentItem="True" CurrentItem="{Binding Source={StaticResource itemCatalogue}, Path=CurrentItem}"
-                      SelectedIndex="{Binding Source={StaticResource itemCatalogue}, Path=CurrentIndex}">
+                      SelectedIndex="{Binding Source={StaticResource itemCatalogue}, Path=CurrentIndex}" Grid.ColumnSpan="2">
                 <!--
                 Used DataGrid.Columns to avoid blank space when stretching datagrid to fit grid.
                 https://stackoverflow.com/questions/30131363/grid-with-datagrid-resizing-in-wpf
@@ -101,8 +103,8 @@
                 </DataGrid.Resources>
             </DataGrid>
 
-            <Label Content="Current Transaction" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"/>
-            <DataGrid x:Name="CurrentTransactionList" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,30,10,10" AutoGenerateColumns="False" VerticalAlignment="Stretch" 
+            <Label Content="Current Transaction" Grid.Column="2" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="173,0,172,0"/>
+            <DataGrid x:Name="CurrentTransactionList" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" Margin="10,30,10,10" AutoGenerateColumns="False" VerticalAlignment="Stretch" 
                       CanUserResizeColumns="True" CanUserReorderColumns="False" CanUserSortColumns="True" SelectionMode="Single" CanUserDeleteRows="False" 
                       CanUserAddRows="False" CanUserResizeRows="True" HeadersVisibility="Column" 
                       ItemsSource="{Binding Source={StaticResource currentTransaction}}"
@@ -125,12 +127,12 @@
                 </DataGrid.Resources>
             </DataGrid>
 
-            <Button Content="Pay" Grid.Column="1" HorizontalAlignment="Left" Margin="195,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="PayButton_Click"/>
-            <ComboBox x:Name="cbPaymentMethod" Grid.Column="1" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" IsSynchronizedWithCurrentItem="True">
+            <Button Content="Pay" Grid.Column="2" HorizontalAlignment="Left" Margin="195,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="PayButton_Click"/>
+            <ComboBox x:Name="cbPaymentMethod" Grid.Column="2" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" IsSynchronizedWithCurrentItem="True">
                 <ComboBoxItem Tag="cbiCash" Content="Cash"/>
                 <ComboBoxItem Tag="cbiMobilePay" Content="MobilePay"/>
             </ComboBox>
-            <Grid HorizontalAlignment="Left" Height="84" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="497" Grid.ColumnSpan="2">
+            <Grid HorizontalAlignment="Left" Height="84" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="497" Grid.ColumnSpan="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>

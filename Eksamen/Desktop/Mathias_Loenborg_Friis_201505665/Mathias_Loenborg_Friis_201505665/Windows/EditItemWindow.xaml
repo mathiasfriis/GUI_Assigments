@@ -1,11 +1,11 @@
-﻿<Window x:Class="Mathias_Loenborg_Friis_201505665.NewItemWindow"
+﻿<Window x:Class="Mathias_Loenborg_Friis_201505665.Windows.EditItemWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Mathias_Loenborg_Friis_201505665"
+        xmlns:local="clr-namespace:Mathias_Loenborg_Friis_201505665.Windows"
         mc:Ignorable="d"
-        Title="Create new item" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Edit Item" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" MinWidth="100" />
@@ -17,11 +17,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <Label Grid.Row="0">ID:</Label>
         <Label Grid.Row="1">Name:</Label>
         <Label Grid.Row="2">Price(DKK):</Label>
-        
+
         <TextBox Name="txtID" Grid.Column="1" Grid.Row="0" MinWidth="250">Enter ID</TextBox>
         <TextBox Name="txtName" Grid.Column="1" Grid.Row="1" MinWidth="250">Enter Name</TextBox>
         <TextBox Name="txtPrice" Grid.Column="1" Grid.Row="2" MinWidth="250">Enter Price</TextBox>

@@ -1,5 +1,6 @@
 ﻿using Mathias_Loenborg_Friis_201505665.Models;
 using Mathias_Loenborg_Friis_201505665.Windows;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +90,61 @@ namespace Mathias_Loenborg_Friis_201505665
         private void removeItemFromTransActionButton(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Removing item from Current Transaction.");
+        }
+
+        private void Menu_EditItem_Click(object sender, RoutedEventArgs e)
+        {
+            ItemCatalogue items = (ItemCatalogue)Resources["itemCatalogue"];
+
+            int index = items.CurrentIndex;
+
+            //create Window to prompt user for data.
+            var editItemWindow = new EditItemWindow(items[index]);
+
+            //if 'OK' pressed
+            if (editItemWindow.ShowDialog() == true)
+            {
+                //Get data from create-window.
+                int ID = editItemWindow.ID;
+                string Name = editItemWindow.Name;
+                int Price = editItemWindow.Price;
+
+                //Create new item with data.
+                Item item = new Item(ID, Name, Price);
+
+                //Replace item with edited item.
+                items[index] = item;
+            }
+        }
+
+        private void _menuItemSaveCatalogueAs(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if(saveFileDialog.ShowDialog()==true)
+            {
+                string filename = saveFileDialog.FileName.ToString();
+                MessageBox.Show("Saving to file:" + filename);
+                ItemCatalogue catalogue = getItemCatalogue();
+                catalogue.filename = filename;
+
+            }
+        }
+
+        private void _menuItemOpenCatalogue(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filename = openFileDialog.FileName.ToString();
+                MessageBox.Show("Opening file:" + filename);
+                ItemCatalogue catalogue = getItemCatalogue();
+                catalogue.filename = filename;
+            }
+        }
+
+        ItemCatalogue getItemCatalogue()
+        {
+            return (ItemCatalogue)Resources["itemCatalogue"];
         }
     }
 }
