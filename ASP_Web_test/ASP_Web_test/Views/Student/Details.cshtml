@@ -1,31 +1,31 @@
 ﻿@model ASP_Web_test.Models.Students
 
+<link rel="stylesheet" href="~/css/site.css" />
+
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
-<h4>Students</h4>
+<h2>Shopping List</h2>
 <div>
 
-    @foreach (Student s in Model.students)
-    {
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => s.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => s.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => s.Quantity)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => s.Quantity)
-            </dd>
-            @Html.ActionLink("Delete", "Delete", new { id = s.ID}) |
-            @Html.ActionLink("Edit", "Edit", new { id = s.ID }) |
-        </dl>
-    }
+    <table>
+        <tr>
+            <th width="100px">Name</th>
+            <th width="70px" >Quantity</th>
+            <th width="50px"></th>
+            <th width="50px"></th>
+        </tr>
+        @foreach (Student s in Model.students)
+        {
+         <tr>
+            <td>@Html.DisplayFor(model => s.Name)</td>
+            <td>@Html.DisplayFor(model => s.Quantity)</td>
+            <td>@Html.ActionLink("Delete", "Delete", new { name = s.Name })</td>
+            <td> @Html.ActionLink("Edit", "Edit", new { name = s.Name})</td>
+        </tr>
+        }
+    </table>
+    <br />
+    <td> @Html.ActionLink("Save shopping list", "Save", new {list = Model.students})</td>
 </div>

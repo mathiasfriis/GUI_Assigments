@@ -26,6 +26,12 @@ namespace ASP_Web_test.Controllers
             return View("Details", students);
         }
 
+        // GET: Student/SaveAs
+        public ActionResult SaveAs()
+        {
+            return View("SaveAs", students);
+        }
+
         // GET: Student/Create
         public ActionResult Create()
         {
@@ -54,10 +60,10 @@ namespace ASP_Web_test.Controllers
         }
 
         // GET: Student/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string name)
         {
             readStudentsFromFile();
-            var st = students.students.Find(s => s.ID == id);
+            var st = students.students.Find(s => s.Name == name);
             return View("Edit", st);
         }
 
@@ -69,7 +75,7 @@ namespace ASP_Web_test.Controllers
             try
             {
                 readStudentsFromFile();
-                int index = students.students.FindIndex(s => s.ID == student.ID);
+                int index = students.students.FindIndex(s => s.Name == student.Name);
                 students.students[index] = student;
                 writeStudentsToFile();
                 return View("Details", students);
@@ -81,10 +87,10 @@ namespace ASP_Web_test.Controllers
         }
 
         // GET: Student/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string name)
         {
             readStudentsFromFile();
-            var st = students.students.Find(s => s.ID == id);
+            var st = students.students.Find(s => s.Name == name);
             return View("Delete",st);
         }
 

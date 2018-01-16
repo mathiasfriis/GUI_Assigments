@@ -26,6 +26,20 @@
     margin: 15px;
 }
 
+table {
+    text-align:left;
+}
+
+tr {
+    width:auto;
+    margin:10px;
+}
+
+th {
+    width: 100px;
+    margin: 10px;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
