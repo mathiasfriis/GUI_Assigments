@@ -124,21 +124,39 @@ namespace Mathias_Loenborg_Friis_201505665.Models
         ICommand _removeItemCommand;
         public ICommand RemoveItemCommand
         {
-            get { return _removeItemCommand ?? (_removeItemCommand = new RelayCommand(RemoveItem, DeleteItem_CanExecute)); }
+            get { return _removeItemCommand ?? (_removeItemCommand = new RelayCommand<Item>(RemoveItem)); }
         }
 
-        private void RemoveItem()
+        private void RemoveItem(Item item)
         {
-            RemoveAt(CurrentIndex);
-            NotifyPropertyChanged("Count");
-        }
+            //Check if Quantity 
+            if (itemQuantities.ContainsKey(item.ID))
+            {
+                itemQuantities[item.ID]--;
+                this.Single(i => i.ID == item.ID).Quantity--;
+                this.Single(i => i.ID == item.ID).UpdateTotalPrice();
+                // Remove from list if Quantity=0
+                if (itemQuantities[item.ID]<=0)
+                {
+                    itemQuantities.Remove(item.ID);
+                    Remove(this.Single(i => i.ID == item.ID));
+                }
+                if(itemQuantities.ContainsKey(item.ID))
+                {
+                    this.Single(i => i.ID == item.ID).UpdateTotalPrice();
+                }
+                NotifyPropertyChanged("totalPrice");
 
-        private bool DeleteItem_CanExecute()
-        {
-            if (Count > 0 && CurrentIndex >= 0)
-                return true;
+            }
             else
-                return false;
+            {
+                //create new item with quantity 1.
+                MessageBox.Show("Cannot remove item from transaction.\nQuantity is already 0.");
+            }
+
+            NotifyPropertyChanged("Count");
+            NotifyPropertyChanged("totalPrice");
+            CurrentIndex = Count - 1;
         }
         #endregion
 
