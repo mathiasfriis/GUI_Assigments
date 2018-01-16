@@ -142,9 +142,39 @@ namespace Mathias_Loenborg_Friis_201505665
             }
         }
 
+        private void _menuItemSaveTransactionAs(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filename = saveFileDialog.FileName.ToString();
+                MessageBox.Show("Saving to file:" + filename);
+                Transaction transaction = getCurrentTransaction();
+                transaction.filename = filename;
+
+            }
+        }
+
+        private void _menuItemOpenTransaction(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filename = openFileDialog.FileName.ToString();
+                MessageBox.Show("Opening file:" + filename);
+                Transaction transaction = getCurrentTransaction();
+                transaction.filename = filename;
+            }
+        }
+
         ItemCatalogue getItemCatalogue()
         {
             return (ItemCatalogue)Resources["itemCatalogue"];
+        }
+
+        Transaction getCurrentTransaction()
+        {
+            return (Transaction)Resources["currentTransaction"];
         }
     }
 }

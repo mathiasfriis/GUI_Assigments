@@ -37,9 +37,9 @@
                 </MenuItem>
                 <MenuItem Header="Transaction List">
                     <MenuItem Header="_New Transaction" Command="{Binding NewTransactionListCommand}"/>
-                    <MenuItem Header="_Open Transaction..." Command="{Binding OpenTransactionListCommand}"/>
+                    <MenuItem Header="_Open Transaction..." Command="{Binding Source={StaticResource currentTransaction}, Path=OpenTransactionCommand}" Click="_menuItemOpenTransaction"/>
                     <MenuItem Header="_Save Transaction" Command="{Binding SaveTransactionListCommand}"/>
-                    <MenuItem Header="_Save Transaction as ..." Command="{Binding OpenTransactionListCommand}"/>
+                    <MenuItem Header="_Save Transaction as ..." Command="{Binding Source={StaticResource currentTransaction}, Path=SaveTransactionAsCommand}" Click="_menuItemSaveTransactionAs"/>
                 </MenuItem>
 
                 <MenuItem Header="E_xit" Command="{Binding CloseAppCommand}"/>

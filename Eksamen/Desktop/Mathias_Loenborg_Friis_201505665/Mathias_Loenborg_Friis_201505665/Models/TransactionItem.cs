@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mathias_Loenborg_Friis_201505665.Models
 {
+    [Serializable]
     public class TransactionItem:INotifyPropertyChanged
     {
         public int ID { get; set; }
@@ -15,6 +16,11 @@ namespace Mathias_Loenborg_Friis_201505665.Models
         public int Price { get; set; }
         public int TotalPrice { get; set; }
         private int quantity = 0;
+
+        public TransactionItem()
+        {
+
+        }
 
         public int Quantity
         {
