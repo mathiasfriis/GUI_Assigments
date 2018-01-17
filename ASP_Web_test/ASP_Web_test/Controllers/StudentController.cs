@@ -27,7 +27,7 @@ namespace ASP_Web_test.Controllers
         }
 
         // GET: Student/SaveAs
-        public ActionResult SaveAs()
+        public ActionResult SaveAs(Students students)
         {
             return View("SaveAs", new file(students));
         }
