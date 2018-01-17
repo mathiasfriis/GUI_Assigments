@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace ASP_Web_test.Models
 {
+    [Serializable]
     public class Student
     {
         public string Name { get; set;}

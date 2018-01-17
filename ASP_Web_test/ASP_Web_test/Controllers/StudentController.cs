@@ -29,7 +29,47 @@ namespace ASP_Web_test.Controllers
         // GET: Student/SaveAs
         public ActionResult SaveAs()
         {
-            return View("SaveAs", students);
+            return View("SaveAs", new file(students));
+        }
+
+        // POST: Student/SaveAs
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveAs(file myFile)
+        {
+            try
+            {
+                //students=myFile.students;
+                saveToFile(myFile.fileName);
+                return View("Details", students);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Student/Open
+        public ActionResult OpenFromFile()
+        {
+            return View("OpenFromFile", new file(students));
+        }
+
+        // POST: Student/SaveAs
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OpenFromFile(file myFile)
+        {
+            try
+            {
+                readFromFile(myFile.fileName);
+                readStudentsFromFile();
+                return View("Details", students);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Student/Create
@@ -66,6 +106,7 @@ namespace ASP_Web_test.Controllers
             var st = students.students.Find(s => s.Name == name);
             return View("Edit", st);
         }
+        
 
         // POST: Student/Edit/5
         [HttpPost]
@@ -102,7 +143,7 @@ namespace ASP_Web_test.Controllers
             try
             {
                 readStudentsFromFile();
-                Student st = students.students.Find(s => s.ID == student.ID);
+                Student st = students.students.Find(s => s.Name == student.Name);
                 students.students.Remove(st);
                 writeStudentsToFile();
                 return View("Details", students);
@@ -111,6 +152,16 @@ namespace ASP_Web_test.Controllers
             {
                 return View();
             }
+        }
+
+        public void saveToFile(string filename)
+        {
+            serialCommunicator.SerializeObject(students, filename);
+        }
+
+        public void readFromFile(string filename)
+        {
+            students = serialCommunicator.DeSerializeObject<Students>(filename);
         }
 
         public void writeStudentsToFile()

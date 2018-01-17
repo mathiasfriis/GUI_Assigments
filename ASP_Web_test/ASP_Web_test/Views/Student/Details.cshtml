@@ -27,5 +27,7 @@
         }
     </table>
     <br />
-    <td> @Html.ActionLink("Save shopping list", "Save", new {list = Model.students})</td>
+    <td> @Html.ActionLink("Save shopping list", "SaveAs", new {list = Model.students})</td>
+    |
+    <td> @Html.ActionLink("Open shopping list from file", "OpenFromFile", new { list = Model.students })</td>
 </div>

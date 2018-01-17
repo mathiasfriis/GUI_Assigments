@@ -16,24 +16,5 @@ namespace ASP_Web_test.Models
         {
             students = s;
         }
-
-        public float averageGrade
-        {
-            get
-            {
-                return getAverageGrade();
-            }
-        }
-
-        public float getAverageGrade()
-        {
-            int sum = 0;
-            foreach(Student s in students)
-            {
-                sum += s.Quantity;
-            }
-            float avg = sum / students.Count;
-            return avg;
-        }
     }
 }

@@ -2,13 +2,18 @@
 <Students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <students>
     <Student>
-      <Name>Slik</Name>
-      <Quantity>300</Quantity>
+      <Name>Ris</Name>
+      <Quantity>999</Quantity>
       <ID>0</ID>
     </Student>
     <Student>
       <Name>Vingummier</Name>
-      <Quantity>200</Quantity>
+      <Quantity>11</Quantity>
+      <ID>0</ID>
+    </Student>
+    <Student>
+      <Name>Sodavand</Name>
+      <Quantity>1</Quantity>
       <ID>0</ID>
     </Student>
   </students>
