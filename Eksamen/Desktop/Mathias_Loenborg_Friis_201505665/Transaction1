@@ -1,0 +1,34 @@
+100
+35
+Cash
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTransactionItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TransactionItem>
+    <ID>1</ID>
+    <Name>Hotdog</Name>
+    <Price>20</Price>
+    <TotalPrice>20</TotalPrice>
+    <Quantity>1</Quantity>
+  </TransactionItem>
+  <TransactionItem>
+    <ID>2</ID>
+    <Name>Fransk Hotdog</Name>
+    <Price>10</Price>
+    <TotalPrice>20</TotalPrice>
+    <Quantity>2</Quantity>
+  </TransactionItem>
+  <TransactionItem>
+    <ID>3</ID>
+    <Name>Sodavand</Name>
+    <Price>10</Price>
+    <TotalPrice>10</TotalPrice>
+    <Quantity>1</Quantity>
+  </TransactionItem>
+  <TransactionItem>
+    <ID>4</ID>
+    <Name>Cocio</Name>
+    <Price>15</Price>
+    <TotalPrice>15</TotalPrice>
+    <Quantity>1</Quantity>
+  </TransactionItem>
+</ArrayOfTransactionItem>

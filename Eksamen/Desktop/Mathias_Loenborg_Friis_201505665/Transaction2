@@ -1,0 +1,27 @@
+100
+40
+MobilePay
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTransactionItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TransactionItem>
+    <ID>1</ID>
+    <Name>Tyggegummi</Name>
+    <Price>1</Price>
+    <TotalPrice>4</TotalPrice>
+    <Quantity>4</Quantity>
+  </TransactionItem>
+  <TransactionItem>
+    <ID>3</ID>
+    <Name>Panzerkampvogn</Name>
+    <Price>6500</Price>
+    <TotalPrice>6500</TotalPrice>
+    <Quantity>1</Quantity>
+  </TransactionItem>
+  <TransactionItem>
+    <ID>2</ID>
+    <Name>Orangevand</Name>
+    <Price>7</Price>
+    <TotalPrice>7</TotalPrice>
+    <Quantity>1</Quantity>
+  </TransactionItem>
+</ArrayOfTransactionItem>

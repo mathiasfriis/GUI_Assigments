@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Item>
-    <ID>5</ID>
-    <Name>Sodavand</Name>
-    <Price>15</Price>
+    <ID>1</ID>
+    <Name>Tyggegummi</Name>
+    <Price>1</Price>
   </Item>
   <Item>
-    <ID>6</ID>
-    <Name>100g rent guld</Name>
-    <Price>10000</Price>
+    <ID>2</ID>
+    <Name>Orangevand</Name>
+    <Price>7</Price>
   </Item>
   <Item>
-    <ID>1337</ID>
-    <Name>Tank</Name>
-    <Price>9999</Price>
+    <ID>3</ID>
+    <Name>Panzerkampvogn</Name>
+    <Price>6500</Price>
   </Item>
 </ArrayOfItem>

@@ -211,6 +211,7 @@ namespace Mathias_Loenborg_Friis_201505665.Models
         private void NewTransactionExecute()
         {
             Clear();
+            itemQuantities.Clear();
 
             NotifyPropertyChanged("Count");
             NotifyPropertyChanged("totalPrice");
